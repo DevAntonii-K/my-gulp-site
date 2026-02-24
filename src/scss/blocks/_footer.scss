@@ -1,0 +1,164 @@
+
+
+
+.footer {
+	background-color: var(--main-text-color);
+}
+
+.footer__container {
+	width: 1120px;
+	margin: 0 auto;
+	@media (max-width: 376px) {
+	  max-width: 311px;
+	}
+}
+
+.footer__content{
+	display: flex;
+	flex-direction: column;
+	gap: 57px;
+	@media (max-width: 376px) {
+	  gap: 40px;
+	}
+}
+
+
+.footer__nav {
+	display: flex;
+	justify-content:space-between;
+	@media (max-width: 376px) {
+	  flex-direction: column;
+	  gap: 40px;
+	}
+}
+
+.nav__items{
+	display: flex;
+	gap: 40px;
+
+	align-items: center;
+
+	a{
+		font-family: var(--font-main);
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 22px;
+		letter-spacing: 0px;
+
+		color: var(--white-accent);
+	}
+	@media (max-width: 376px) {
+	  flex-direction: column;
+	  gap: 32px;
+	}
+}
+
+.store__info {
+	display: flex;
+	align-items: center;
+	@media (max-width: 376px) {
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	}
+}
+
+.footer__logo {
+	font-family: var(--font-secondary); 
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 24px;
+
+	color: white;
+
+	padding-right: 32px;
+	border-right: 1px solid #6C7275;
+
+	span{
+		color: #6C7275;
+	}
+	@media (max-width: 376px) {
+	  border-right: none;
+	  border-bottom: 1px solid #6C7275;
+	  padding-bottom: 16px;
+	  padding-right: 0;
+	}
+}
+
+.footer__store-desc{
+	font-family: var(--font-main);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 22px;
+	letter-spacing: 0px;
+
+	padding-left: 32px;
+
+	color:#E8ECEF;
+	@media (max-width: 376px) {
+	  padding-top: 16px;
+	  padding-left: 0;
+	}
+}
+
+.footer__credits {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	border-top:  1px solid #6C7275;
+	@media (max-width: 376px) {
+	   flex-direction: column-reverse;
+	   gap: 32px;
+	   padding: 24px 0;
+	}
+	
+}
+.copyright{
+	display: flex;
+	gap: 28px;
+
+	padding:16px 0 20px 0;
+
+	.copyright-disclaimer{
+		font-weight: 400;
+		font-size: 12px;
+		color: #E8ECEF;
+	}
+	a{
+		font-family: var(--font-main);
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 20px;
+
+		color:#FEFEFE;
+	}
+	@media (max-width: 376px) {
+	  display: flex;
+	  flex-direction: column-reverse;
+	  align-items: center;
+	  justify-content: center;
+	  padding: 0;
+	}
+}
+
+.policy{
+	@media (max-width: 376px) {
+	  display: flex;
+	  gap: 28px;
+	}
+}
+
+.social {
+	@media (max-width: 376px) {
+	  display: flex;
+	  gap: 24px;
+	}
+}
+
+.copyright {
+	
+
+}
+
+.social {}

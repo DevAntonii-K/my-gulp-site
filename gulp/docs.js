@@ -22,6 +22,7 @@ const notify = require('gulp-notify');
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
 const changed = require('gulp-changed');
+const replace = require('gulp-replace');
 
 // Images
 const imagemin = require('gulp-imagemin');
@@ -60,7 +61,20 @@ gulp.task('html:docs', function () {
 		.pipe(changed('./docs/'))
 		.pipe(plumber(plumberNotify('HTML')))
 		.pipe(fileInclude(fileIncludeSetting))
-		// .pipe(webpHTML())
+		// ==============================
+		.pipe(replace(/@img\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'img/';
+		}))
+		.pipe(replace(/@css\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'css/';
+		}))
+		.pipe(replace(/@js\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'js/';
+		}))
+		// ==============================
 		.pipe(htmlclean())
 		.pipe(gulp.dest('./docs/'));
 });
@@ -76,6 +90,7 @@ gulp.task('sass:docs', function () {
 		.pipe(webpCss())
 		.pipe(groupMedia())
 		.pipe(sass())
+		.pipe(replace(/@img\//g, '../img/'))  // <- ось тут
 		.pipe(csso())
 		.pipe(sourceMaps.write())
 		.pipe(gulp.dest('./docs/css/'));

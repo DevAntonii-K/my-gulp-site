@@ -3,7 +3,7 @@
 .hero{
 	height: 820px;
 	padding: 222px 0 346px 0;
-	background-image: url('../../img/tagline/bg@2x.jpg');
+	background-image: url('@img/tagline/bg@2x.jpg');
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -12,7 +12,7 @@
   .hero{
 	height: 690px;	
 	padding: 40px 32px;
-	background-image: url('../../img/header/hero_bg-mobile.png');
+	background-image: url('@img/header/hero_bg-mobile.png');
   }
 }
 

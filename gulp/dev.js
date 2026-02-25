@@ -12,6 +12,7 @@ const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
 const imagemin = require('gulp-imagemin');
 const changed = require('gulp-changed');
+const replace = require('gulp-replace');
 
 gulp.task('clean:dev', function (done) {
 	if (fs.existsSync('./build/')) {
@@ -38,14 +39,27 @@ const plumberNotify = (title) => {
 };
 
 gulp.task('html:dev', function () {
-	return (
-		gulp
-			.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
-			.pipe(changed('./build/', { hasChanged: changed.compareContents }))
-			.pipe(plumber(plumberNotify('HTML')))
-			.pipe(fileInclude(fileIncludeSetting))
-			.pipe(gulp.dest('./build/'))
-	);
+	return gulp
+		.src(['./src/html/**/*.html', '!./src/html/blocks/*.html'])
+		.pipe(changed('./build/', { hasChanged: changed.compareContents }))
+		.pipe(plumber(plumberNotify('HTML')))
+		.pipe(fileInclude(fileIncludeSetting))
+		// ==============================
+		// Підстановка правильних відносних шляхів
+		.pipe(replace(/@img\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'img/';
+		}))
+		.pipe(replace(/@css\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'css/';
+		}))
+		.pipe(replace(/@js\//g, function () {
+			const path = this.file.relative.split(/[/\\]/).slice(0, -1).map(() => '../').join('');
+			return path + 'js/';
+		}))
+		// ==============================
+		.pipe(gulp.dest('./build/'));
 });
 
 gulp.task('sass:dev', function () {
@@ -57,6 +71,10 @@ gulp.task('sass:dev', function () {
 			.pipe(sourceMaps.init())
 			.pipe(sassGlob())
 			.pipe(sass())
+			// ===============================
+			// Замінюємо @img/ на ../img/ для всіх background-image
+			.pipe(replace(/@img\//g, '../img/'))
+			// ===============================
 			.pipe(sourceMaps.write())
 			.pipe(gulp.dest('./build/css/'))
 	);
